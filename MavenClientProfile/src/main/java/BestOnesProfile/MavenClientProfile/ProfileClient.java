@@ -11,7 +11,7 @@ import ProfileObjects.profile.Location;
 import ProfileObjects.profile.Profile;
 
 public class ProfileClient {
-	ICRUDService service = JAXRSClientFactory.create("http://localhost:8080/hellorest-server/rest", ICRUDService.class, Arrays.asList(new JSONProvider<Object>()));
+	ICRUDService service = JAXRSClientFactory.create("http://localhost:8080/MavenServerProfile/rest", ICRUDService.class, Arrays.asList(new JSONProvider<Object>()));
 	
 	public Profile getProfile(int id) throws CustomException{
 		return service.getProfile(id).readEntity(Profile.class);
@@ -44,5 +44,9 @@ public class ProfileClient {
 		profile.setUserRating(5);
 		Profile created = client.createProfile(profile);
 		System.out.println(client.getProfile(created.getUserID()).getName());
+		System.out.println("test1"+client.getProfile(created.getUserID()));
+		client.deleteProfile(created.getUserID());
+		
+
 	}
 }
